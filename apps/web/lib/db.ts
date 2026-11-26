@@ -10,7 +10,7 @@ export interface Ajustes {
   modelo: string;
   latenciaMaxMs: number;
   tasaError: number;
-  /** Fuentes simuladas que el encargado desconectó desde el panel. */
+  /** Fuentes que el encargado desconectó desde el panel. */
   fuentesDesconectadas: string[];
 }
 

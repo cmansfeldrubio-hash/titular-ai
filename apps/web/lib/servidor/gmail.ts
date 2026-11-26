@@ -124,7 +124,7 @@ export interface CorreoSaliente {
   para: string;
   asunto: string;
   cuerpo: string;
-  tipo: 'respuesta' | 'simulada';
+  tipo: 'respuesta';
   threadId?: string;
   inReplyTo?: string;
   adjunto?: { nombre: string; base64: string; mime: string };

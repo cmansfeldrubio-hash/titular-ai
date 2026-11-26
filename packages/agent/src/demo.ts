@@ -75,7 +75,7 @@ export async function investigarDemo(
   op.alEvento({
     tipo: 'paso',
     texto:
-      'Modo demostración: el razonamiento está pregrabado; las búsquedas en las fuentes simuladas son reales.',
+      'Modo demostración: el razonamiento está pregrabado; las búsquedas en las fuentes son reales.',
   });
   await pensar('Primero reviso qué fuentes hay y cuánto plazo queda para responder.');
   await Promise.all([

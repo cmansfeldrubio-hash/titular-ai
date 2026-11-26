@@ -46,7 +46,7 @@ export function crearConectoresSimulados(
         id: 'crm',
         nombre: 'CRM',
         sePresentaComo: 'Plataforma de ventas tipo HubSpot',
-        formato: 'JSON por API simulada',
+        formato: 'JSON por API',
         entidad: 'Contactos (clientes y prospectos)',
         campos: [
           c('id', 'texto', 'Identificador del contacto', false),
@@ -73,7 +73,7 @@ export function crearConectoresSimulados(
         id: 'erp',
         nombre: 'ERP y facturación',
         sePresentaComo: 'Sistema contable',
-        formato: 'JSON por API simulada',
+        formato: 'JSON por API',
         entidad: 'Clientes con documentos tributarios',
         campos: [
           c('id', 'texto', 'Identificador interno', false),
@@ -94,7 +94,7 @@ export function crearConectoresSimulados(
         id: 'tienda',
         nombre: 'Tienda online',
         sePresentaComo: 'Plataforma de e-commerce',
-        formato: 'JSON por API simulada',
+        formato: 'JSON por API',
         entidad: 'Clientes y pedidos',
         campos: [
           c('id', 'texto', 'Identificador del cliente', false),
@@ -137,14 +137,12 @@ export function crearConectoresSimulados(
         cargarRegistros: () => {
           const libro = XLSX.read(planillasXlsx(empresa), { type: 'array' });
           return libro.SheetNames.flatMap((hoja) =>
-            XLSX.utils
-              .sheet_to_json<Record<string, unknown>>(libro.Sheets[hoja]!)
-              .map((fila, i) =>
-                reg('planillas', `xlsx-${hoja.split(' ')[0]?.toLowerCase()}-${i + 2}`, {
-                  hoja,
-                  ...fila,
-                }),
-              ),
+            XLSX.utils.sheet_to_json<Record<string, unknown>>(libro.Sheets[hoja]!).map((fila, i) =>
+              reg('planillas', `xlsx-${hoja.split(' ')[0]?.toLowerCase()}-${i + 2}`, {
+                hoja,
+                ...fila,
+              }),
+            ),
           );
         },
         identidad: (r) => ({

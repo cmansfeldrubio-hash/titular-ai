@@ -21,7 +21,7 @@ export const TRATAMIENTO_POR_FUENTE: Record<string, InfoTratamiento> = {
   },
   tienda: {
     finalidad: 'Gestión de pedidos, pagos y despachos de la tienda online',
-    destinatarios: 'Empresa de despacho y procesador de pagos (simulados)',
+    destinatarios: 'Empresa de despacho y procesador de pagos',
     accesos: 'Equipo de e-commerce y atención al cliente',
     conservacion:
       'Mientras la cuenta esté activa y hasta 2 años después del último pedido (sugerido)',
@@ -34,14 +34,14 @@ export const TRATAMIENTO_POR_FUENTE: Record<string, InfoTratamiento> = {
   },
   rrhh: {
     finalidad: 'Gestión de la relación laboral, remuneraciones y licencias médicas',
-    destinatarios: 'AFP, institución de salud y organismos laborales (simulados)',
+    destinatarios: 'AFP, institución de salud y organismos laborales',
     accesos: 'Solo Recursos Humanos y remuneraciones',
     conservacion:
       'Durante la relación laboral y el plazo que exige la normativa laboral y previsional (sugerido)',
   },
   marketing: {
     finalidad: 'Envío de newsletter y comunicaciones comerciales con consentimiento',
-    destinatarios: 'Plataforma de envío de correos (simulada)',
+    destinatarios: 'Plataforma de envío de correos',
     accesos: 'Equipo de marketing',
     conservacion: 'Hasta que la persona retire su consentimiento (sugerido)',
   },

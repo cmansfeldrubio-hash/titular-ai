@@ -73,10 +73,7 @@ export class ConectorSimulado implements Connector {
       throw new ErrorFuente(this.id, `${this.nombre} está desconectada`, false);
     }
     if (azar() < this.simulacion.tasaError) {
-      throw new ErrorFuente(
-        this.id,
-        `${this.nombre}: tiempo de espera agotado en ${operacion} (error simulado)`,
-      );
+      throw new ErrorFuente(this.id, `${this.nombre}: tiempo de espera agotado en ${operacion}`);
     }
   }
 

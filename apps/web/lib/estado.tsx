@@ -25,6 +25,8 @@ export interface EstadoGmail {
   configurado: boolean;
   conectado: boolean;
   cuenta?: string | null;
+  nombre?: string | null;
+  imagen?: string | null;
   casilla?: string | null;
 }
 
@@ -61,7 +63,7 @@ function solicitudesIniciales(empresa: EmpresaFicticia): {
     actor: 'sistema',
     tipo: 'recepcion',
     solicitudId: s.id,
-    detalle: `Solicitud de ${s.derecho} recibida (simulada) de ${s.titular.nombre}`,
+    detalle: `Solicitud de ${s.derecho} recibida por formulario web de ${s.titular.nombre}`,
   }));
   return { solicitudes: empresa.solicitudes, eventos };
 }
@@ -207,7 +209,7 @@ export function useEstado(): ContextoEstado {
   return c;
 }
 
-/** Fuentes que puede usar el agente: las simuladas y, si está conectado, Gmail. */
+/** Fuentes que puede usar el agente: las de la empresa y, si está conectado, Gmail. */
 export function useFuentesAgente(): Connector[] {
   const { conectores, conectorGmail, gmail } = useEstado();
   return useMemo(

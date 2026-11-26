@@ -1,4 +1,6 @@
-# Agente de IA para la Ley 21.719 · prototipo académico
+# AI Titular · prototipo académico
+
+**Tu agente que responde las solicitudes de datos personales de la Ley 21.719.**
 
 Aplicación web de demostración en la que un agente de IA ubica los datos de una persona en las fuentes de una empresa ficticia, redacta la respuesta a su solicitud bajo la Ley 21.719 y la deja lista para que un encargado de cumplimiento la apruebe y la envíe por correo.
 
@@ -8,21 +10,21 @@ Aplicación web de demostración en la que un agente de IA ubica los datos de un
 
 | Pantalla      | Qué permite                                                                                                                                                                                       |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bandeja       | Solicitudes simuladas y de Gmail, con semáforo de plazo (30 días corridos, prórroga única de 30)                                                                                                  |
+| Bandeja       | Solicitudes del formulario web y de Gmail, con semáforo de plazo (30 días corridos, prórroga única de 30)                                                                                         |
 | Detalle       | «Investigar»: el agente busca al titular en todas las fuentes y muestra cada paso en vivo; hallazgos con confianza, revisión de coincidencias dudosas, borrador editable, aprobación, PDF y envío |
 | Inventario    | «Escanear fuentes»: el agente propone el registro de actividades de tratamiento; el encargado edita y confirma                                                                                    |
 | Bitácora      | Registro de solo agregar de cada evento, filtrable y exportable a CSV                                                                                                                             |
 | Reportes      | Reporte de cumplimiento en PDF con métricas; exportación a XLSX                                                                                                                                   |
 | Configuración | Clave de Anthropic, modelo, Gmail, panel de integraciones, empresa ficticia y preparación de la demo                                                                                              |
 
-Sin clave de Anthropic ni Gmail, todo funciona en **modo demostración**: el razonamiento del agente está pregrabado, pero las búsquedas en las fuentes simuladas son reales.
+Sin clave de Anthropic ni Gmail, todo funciona en **modo demostración**: el razonamiento del agente está pregrabado, pero las búsquedas en las fuentes son reales.
 
 ## Arquitectura
 
 ```
 ley21719-agente/
 ├─ apps/web/              Next.js 16 (App Router) + Astryx; única app desplegada en Vercel
-│  ├─ app/api/gmail/      rutas de servidor: leer, enviar, simular y estado de Gmail
+│  ├─ app/api/gmail/      rutas de servidor: leer, enviar y estado de Gmail
 │  ├─ app/api/aprobaciones/  firma la aprobación humana que exige el envío
 │  ├─ proxy.ts            CSP estricta con nonce y acceso restringido
 │  └─ astryx-themes.js    tema generado por la CLI de Astryx
@@ -84,19 +86,19 @@ Con Google configurado, solo pueden ingresar las cuentas de `ALLOWED_EMAILS`, y 
 | Protección     | Deployment Protection activa en las vistas previas       |
 | Dominio        | uno fijo, registrado en Google como URI de redirección   |
 
-Las vistas previas operan en modo simulado salvo que tengan un dominio fijo registrado en Google.
+Las vistas previas operan sin Gmail salvo que tengan un dominio fijo registrado en Google.
 
 ## Guion de la demo (menos de 3 minutos)
 
 1. **Configuración → Preparar la demo → Regenerar y restaurar** (semilla 21719). Si hay Gmail, reconectarlo.
 2. Pegar la clave exclusiva para la demo y pulsar **Guardar y probar** (sin clave, la demo corre en modo demostración).
 3. **Bandeja**: mostrar el semáforo; abrir **SOL-002** (urgente, tiene un homónimo).
-4. **Investigar**: el agente recorre las seis fuentes, reintenta ante errores simulados y vuelve a buscar con el teléfono que encontró.
+4. **Investigar**: el agente recorre las seis fuentes, reintenta cuando una fuente no responde y vuelve a buscar con el teléfono que encontró.
 5. **Hallazgos**: descartar los homónimos dudosos; mostrar el aviso de datos de salud ocultos al modelo.
 6. Editar una línea del borrador y **Aprobar**: se genera el PDF (y se envía por Gmail si la solicitud vino de la casilla).
 7. **Bitácora** y **Reportes**: descargar el reporte de cumplimiento.
 
-Para una solicitud real por Gmail: **Bandeja → Simular solicitud** (envía a la casilla el correo de un titular ficticio) → **Leer Gmail** → investigar → aprobar y enviar en el mismo hilo.
+Para una solicitud real por Gmail: escribe a la casilla de prueba desde una cuenta autorizada, con un asunto que mencione «solicitud» o «datos personales» → **Bandeja → Leer Gmail** → investigar → aprobar y enviar en el mismo hilo.
 
 ## Seguridad
 

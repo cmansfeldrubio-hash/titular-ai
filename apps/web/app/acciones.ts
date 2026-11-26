@@ -4,7 +4,7 @@ import { signIn, signOut } from '@/auth';
 
 /** Conecta Gmail con OAuth de Google desde el servidor (RG-01). */
 export async function conectarGmail() {
-  await signIn('google', { redirectTo: '/configuracion' });
+  await signIn('google', { redirectTo: '/bienvenida' });
 }
 
 export async function desconectarGmail() {

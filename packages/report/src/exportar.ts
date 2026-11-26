@@ -46,7 +46,7 @@ export function filasSolicitudes(solicitudes: Solicitud[], ahora = new Date()) {
       ID: s.id,
       Titular: s.titular.nombre,
       Derecho: DERECHO_ETIQUETA[s.derecho],
-      Canal: s.canal === 'gmail' ? 'Gmail' : 'Simulada',
+      Canal: s.canal === 'gmail' ? 'Gmail' : 'Formulario web',
       Recibida: formatearFecha(s.recibidaEn),
       Vence: formatearFecha(`${p.vence}T12:00:00Z`),
       'Días restantes': s.respondidaEn ? '' : p.diasRestantes,

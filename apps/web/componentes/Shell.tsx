@@ -2,7 +2,6 @@
 
 import { AppShell } from '@astryxdesign/core/AppShell';
 import { Badge } from '@astryxdesign/core/Badge';
-import { Banner } from '@astryxdesign/core/Banner';
 import { Center } from '@astryxdesign/core/Center';
 import { SideNav, SideNavHeading, SideNavItem, SideNavSection } from '@astryxdesign/core/SideNav';
 import { Spinner } from '@astryxdesign/core/Spinner';
@@ -10,8 +9,9 @@ import { Text } from '@astryxdesign/core/Text';
 import { VStack } from '@astryxdesign/core/VStack';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type { ReactNode } from 'react';
-import { useClave } from '@/lib/clave';
+import { useState, type ReactNode } from 'react';
+import { DESCRIPCION_CORTA, LogoAITitular, NOMBRE_PRODUCTO } from '@/componentes/Marca';
+import { UsuarioMenu } from '@/componentes/UsuarioMenu';
 import { useEstado } from '@/lib/estado';
 import { calcularPlazo } from '@ley/domain';
 
@@ -23,11 +23,11 @@ const NAV = [
   { href: '/configuracion', label: 'Configuración', icon: 'wrench' as const },
 ];
 
-/** Marco de la app: navegación, aviso permanente (RNF-14) e indicador de modo (RK-09). */
+/** Marco de la app: menú lateral contraíble con el usuario conectado, y contenido. */
 export function Shell({ children }: { children: ReactNode }) {
   const ruta = usePathname();
   const { cargado, solicitudes, empresa, gmail } = useEstado();
-  const { clave } = useClave();
+  const [contraido, setContraido] = useState(false);
   const urgentes = solicitudes.filter(
     (s) => !s.respondidaEn && calcularPlazo(s.recibidaEn, s.prorroga).diasRestantes <= 3,
   ).length;
@@ -37,25 +37,33 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <AppShell
-      banner={
-        <Banner
-          status="warning"
-          container="section"
-          collapsible={false}
-          title="Prototipo académico · Datos ficticios · No es asesoría legal"
-          description={`${empresa.empresa.nombre} es una empresa inventada. Modo: ${clave ? 'agente con tu clave de Anthropic' : 'demostración (respuestas del agente pregrabadas)'} · Gmail: ${gmail.conectado ? 'conectado' : 'no conectado (envíos registrados como «no enviado»)'}.`}
-        />
-      }
       sideNav={
         <SideNav
           header={
-            <SideNavHeading heading="Agente Ley 21.719" subheading={empresa.empresa.nombre} />
+            <SideNavHeading
+              heading={NOMBRE_PRODUCTO}
+              subheading={DESCRIPCION_CORTA}
+              icon={<LogoAITitular tamano={28} />}
+            />
           }
+          collapsible={{
+            isCollapsed: contraido,
+            onCollapsedChange: setContraido,
+            hasButton: true,
+          }}
           footer={
-            <VStack padding={2} gap={1}>
-              <Text type="supporting" color="secondary">
-                Rol: encargado de cumplimiento
-              </Text>
+            <VStack padding={2} gap={2}>
+              {contraido ? null : (
+                <VStack gap={0.5}>
+                  <Text type="supporting" color="secondary">
+                    {empresa.empresa.nombre}
+                  </Text>
+                  <Text type="supporting" color="secondary">
+                    Rol: encargado de cumplimiento
+                  </Text>
+                </VStack>
+              )}
+              <UsuarioMenu gmail={gmail} compacto={contraido} />
             </VStack>
           }
         >
@@ -80,7 +88,7 @@ export function Shell({ children }: { children: ReactNode }) {
       }
     >
       {cargado ? (
-        children
+        <VStack className="ai-entrada">{children}</VStack>
       ) : (
         <Center height="60dvh">
           <Spinner size="lg" label="Cargando el estado local…" />

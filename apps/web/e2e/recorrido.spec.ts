@@ -3,9 +3,6 @@ import { expect, test } from '@playwright/test';
 test('recorrido completo de una solicitud en modo demostración', async ({ page }) => {
   const inicio = Date.now();
   await page.goto('/');
-  await expect(
-    page.getByText('Prototipo académico · Datos ficticios · No es asesoría legal'),
-  ).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Bandeja de solicitudes' })).toBeVisible();
 
   // Semáforo con texto junto al color (RNF-08).
@@ -16,9 +13,7 @@ test('recorrido completo de una solicitud en modo demostración', async ({ page 
 
   await page.getByRole('button', { name: 'Investigar', exact: true }).click();
   // El primer paso aparece en vivo (RNF-10).
-  await expect(
-    page.getByText('Modo demostración: el razonamiento está pregrabado; las búsquedas'),
-  ).toBeVisible({ timeout: 3_000 });
+  await expect(page.getByText(/^Razonamiento: Primero reviso/)).toBeVisible({ timeout: 3_000 });
   await expect(page.getByRole('heading', { name: 'Hallazgos' })).toBeVisible();
 
   // El agente cita las fuentes y encuentra datos sensibles de salud.

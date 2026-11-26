@@ -327,7 +327,7 @@ const DERECHO_TEXTO: Record<Derecho, string> = {
   bloqueo: 'bloqueo',
 };
 
-/** Correo de un titular ficticio que ejerce un derecho; se usa en la semilla y en «Simular solicitud». */
+/** Correo de un titular ficticio que ejerce un derecho; se usa en las solicitudes de ejemplo. */
 export function correoDeTitular(
   p: PersonaBase,
   derecho: Derecho,

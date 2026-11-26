@@ -13,7 +13,7 @@ import {
   MINUTOS_CON_AGENTE_POR_SOLICITUD,
   MINUTOS_MANUAL_POR_SOLICITUD,
 } from '@ley/domain';
-import { bitacoraCsv, exportarRegistroXlsx, generarPdfCumplimiento, MARCA } from '@ley/report';
+import { bitacoraCsv, exportarRegistroXlsx, generarPdfCumplimiento } from '@ley/report';
 import { Encabezado, Pantalla } from '@/componentes/Encabezado';
 import { useEstado } from '@/lib/estado';
 import { descargar, fechaArchivo, NOMBRE_FUENTE, numero, usd, XLSX_MIME } from '@/lib/utiles';
@@ -75,7 +75,6 @@ export function Reportes() {
     <Pantalla>
       <Encabezado
         titulo="Reportes"
-        descripcion={`Todos los reportes llevan la marca «${MARCA}».`}
         acciones={
           <Button
             label="Descargar reporte de cumplimiento (PDF)"

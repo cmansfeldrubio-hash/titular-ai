@@ -18,15 +18,12 @@ import type { CorreoGmail } from '@ley/connectors';
 import {
   calcularPlazo,
   DERECHO_ETIQUETA,
-  DERECHOS,
   ESTADO_ETIQUETA,
   formatearFecha,
-  generarId,
   semaforo,
   type EstadoSolicitud,
   type Solicitud,
 } from '@ley/domain';
-import { correoDeTitular } from '@ley/mock-data';
 import { useMemo, useState } from 'react';
 import { Encabezado, Pantalla } from '@/componentes/Encabezado';
 import { Plazo } from '@/componentes/Plazo';
@@ -51,8 +48,7 @@ function abierta(s: Solicitud) {
 }
 
 export function Bandeja() {
-  const { solicitudes, empresa, gmail, conectorGmail, agregarSolicitudes, registrar, ajustes } =
-    useEstado();
+  const { solicitudes, gmail, conectorGmail, agregarSolicitudes, registrar, ajustes } = useEstado();
   const { clave } = useClave();
   const toast = useToast();
   const [leyendo, setLeyendo] = useState(false);
@@ -145,64 +141,20 @@ export function Bandeja() {
     }
   }
 
-  /** Simula la solicitud de un titular ficticio (RG-06); sin Gmail, la crea directo en la bandeja. */
-  async function simular() {
-    const candidatos = empresa.personas.filter((p) => !p.homonimoDe);
-    const p = candidatos[Math.floor(Math.random() * candidatos.length)]!;
-    const derecho = DERECHOS[Math.floor(Math.random() * DERECHOS.length)]!;
-    const correo = correoDeTitular(p, derecho);
-    if (gmail.conectado) {
-      const r = await fetch('/api/gmail/simulate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ asunto: `[Simulada] ${correo.asunto}`, cuerpo: correo.mensaje }),
-      });
-      toast(
-        r.ok
-          ? { body: 'Correo simulado enviado a la casilla. Usa «Leer Gmail» en unos segundos.' }
-          : { body: 'No se pudo enviar el correo simulado', type: 'error' },
-      );
-      return;
-    }
-    const s: Solicitud = {
-      id: generarId('SIM').toUpperCase().slice(0, 12),
-      titular: {
-        nombre: `${p.nombres} ${p.apellidoPaterno} ${p.apellidoMaterno}`,
-        rut: p.rut,
-        email: p.email,
-      },
-      derecho,
-      recibidaEn: new Date().toISOString(),
-      canal: 'simulada',
-      asunto: correo.asunto,
-      mensaje: correo.mensaje,
-      estado: 'nueva',
-      clasificadaPor: 'semilla',
-      revisiones: {},
-      versionBorrador: 0,
-    };
-    await agregarSolicitudes([s]);
-    await registrar({
-      actor: 'sistema',
-      tipo: 'recepcion',
-      solicitudId: s.id,
-      detalle: `Solicitud simulada de ${DERECHO_ETIQUETA[derecho].toLowerCase()} de ${s.titular.nombre}`,
-    });
-    toast({ body: `Nueva solicitud simulada: ${s.titular.nombre}` });
-  }
-
   return (
     <Pantalla>
       <Encabezado
         titulo="Bandeja de solicitudes"
         descripcion="Plazo legal de 30 días corridos desde la recepción, prorrogable una vez por 30 días."
         acciones={
-          <>
-            {gmail.conectado ? (
-              <Button label="Leer Gmail" clickAction={leerGmail} isLoading={leyendo} />
-            ) : null}
-            <Button label="Simular solicitud" variant="primary" clickAction={simular} />
-          </>
+          gmail.conectado ? (
+            <Button
+              label="Leer Gmail"
+              variant="primary"
+              clickAction={leerGmail}
+              isLoading={leyendo}
+            />
+          ) : null
         }
       />
       <HStack gap={4} wrap="wrap">
@@ -246,7 +198,7 @@ export function Bandeja() {
           {
             key: 'canal',
             header: 'Canal',
-            renderCell: (s: Solicitud) => (s.canal === 'gmail' ? 'Gmail' : 'Simulada'),
+            renderCell: (s: Solicitud) => (s.canal === 'gmail' ? 'Gmail' : 'Formulario web'),
           },
         ]}
       />

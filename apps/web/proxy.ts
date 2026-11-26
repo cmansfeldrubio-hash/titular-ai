@@ -13,7 +13,8 @@ function politica(nonce: string): string {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'${dev ? ` 'unsafe-eval'` : ''}`,
     // Los componentes aplican estilos en línea (atributo style), que no admiten nonce.
     `style-src 'self' 'unsafe-inline'`,
-    `img-src 'self' blob: data:`,
+    // Foto de perfil de la cuenta de Google.
+    `img-src 'self' blob: data: https://lh3.googleusercontent.com`,
     `font-src 'self' data:`,
     // data: solo permite leer el módulo WebAssembly incrustado del generador de PDF; no abre otros dominios.
     `connect-src 'self' data: https://api.anthropic.com${dev ? ' ws: wss:' : ''}`,

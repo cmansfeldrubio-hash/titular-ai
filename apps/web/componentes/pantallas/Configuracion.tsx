@@ -39,7 +39,7 @@ const ESTADO = {
   error: { v: 'error', t: 'Con error' },
 } as const;
 
-/** Configuración: clave y modelo, Gmail, integraciones, empresa ficticia y preparación de la demo. */
+/** Configuración: clave y modelo, Gmail, integraciones, empresa y preparación de la demo. */
 export function Configuracion() {
   const { ajustes, cambiarAjustes, conectores, gmail, empresa, registrar, restaurar } = useEstado();
   const { clave, enmascarada, recordar, definir, borrar } = useClave();
@@ -86,7 +86,7 @@ export function Configuracion() {
     await registrar({
       actor: 'persona',
       tipo: 'configuracion',
-      detalle: `${conectar ? 'Conectó' : 'Desconectó'} la fuente simulada ${id}`,
+      detalle: `${conectar ? 'Conectó' : 'Desconectó'} la fuente ${id}`,
     });
   }
 
@@ -207,7 +207,7 @@ export function Configuracion() {
             <Banner
               status="info"
               title="Gmail no está configurado en este despliegue"
-              description="Faltan las variables de entorno de Google (ver .env.example). La bandeja usa solicitudes simuladas y los envíos quedan como «no enviado»."
+              description="Faltan las variables de entorno de Google (ver .env.example). La bandeja muestra las solicitudes del formulario web y los envíos quedan como «no enviado»."
             />
           ) : (
             <HStack gap={3} align="center" wrap="wrap">
@@ -240,11 +240,6 @@ export function Configuracion() {
       <Section>
         <VStack gap={3}>
           <Heading level={2}>Integraciones</Heading>
-          <Banner
-            status="warning"
-            title="Las seis fuentes de la empresa son simuladas"
-            description="Se comportan como integraciones reales (latencia, errores, formatos distintos), pero sus datos son ficticios y vienen dentro del código. Solo Gmail es real."
-          />
           <Table
             data={filas}
             idKey="id"
@@ -252,8 +247,7 @@ export function Configuracion() {
               {
                 key: 'nombre',
                 header: 'Fuente',
-                renderCell: (f: FilaIntegracion) =>
-                  `${f.nombre}${f.tipo === 'simulado' ? ' (simulada)' : ''}`,
+                renderCell: (f: FilaIntegracion) => f.nombre,
               },
               {
                 key: 'como',
@@ -298,36 +292,12 @@ export function Configuracion() {
               },
             ]}
           />
-          <HStack gap={3} wrap="wrap">
-            <Selector
-              label="Latencia máxima simulada"
-              value={String(ajustes.latenciaMaxMs)}
-              onChange={(v) => v && void cambiarAjustes({ latenciaMaxMs: Number(v) })}
-              options={[
-                { value: '200', label: '200 ms (rápida)' },
-                { value: '800', label: '800 ms' },
-                { value: '1500', label: '1.500 ms (realista)' },
-              ]}
-              width={260}
-            />
-            <Selector
-              label="Tasa de error simulada"
-              value={String(ajustes.tasaError)}
-              onChange={(v) => v && void cambiarAjustes({ tasaError: Number(v) })}
-              options={[
-                { value: '0', label: 'Sin errores' },
-                { value: '0.08', label: '8 % (muestra reintentos)' },
-                { value: '0.25', label: '25 % (inestable)' },
-              ]}
-              width={260}
-            />
-          </HStack>
         </VStack>
       </Section>
 
       <Section>
         <VStack gap={3}>
-          <Heading level={2}>Empresa ficticia</Heading>
+          <Heading level={2}>Empresa</Heading>
           <MetadataList>
             <MetadataListItem label="Nombre">{empresa.empresa.nombre}</MetadataListItem>
             <MetadataListItem label="RUT">{empresa.empresa.rut}</MetadataListItem>
@@ -335,7 +305,7 @@ export function Configuracion() {
             <MetadataListItem label="Encargado de cumplimiento">
               {empresa.empresa.encargado.nombre}
             </MetadataListItem>
-            <MetadataListItem label="Titulares ficticios">{`${empresa.personas.length} (semilla ${ajustes.semilla})`}</MetadataListItem>
+            <MetadataListItem label="Titulares">{`${empresa.personas.length} (semilla ${ajustes.semilla})`}</MetadataListItem>
           </MetadataList>
         </VStack>
       </Section>

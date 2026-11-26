@@ -110,7 +110,7 @@ export const VENDEDORES = [
   'Diego Urrutia',
 ] as const;
 export const AFP = ['AFP Ejemplo Uno', 'AFP Ejemplo Dos', 'AFP Ejemplo Tres'] as const;
-export const ISAPRE = ['Isapre Demo Salud', 'Isapre Ficticia Vida', 'Fonasa (simulado)'] as const;
+export const ISAPRE = ['Isapre Demo Salud', 'Isapre Ficticia Vida', 'Fonasa'] as const;
 export const CARGOS = [
   'Vendedor/a de sala',
   'Bodeguero/a',

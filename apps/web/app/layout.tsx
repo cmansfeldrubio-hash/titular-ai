@@ -5,8 +5,8 @@ import './globals.css';
 import { Proveedores } from './proveedores';
 
 export const metadata: Metadata = {
-  title: 'Agente Ley 21.719 · Prototipo académico',
-  description: 'Prototipo académico con datos ficticios. No es asesoría legal.',
+  title: 'AI Titular',
+  description: 'Tu agente que responde las solicitudes de datos personales de la Ley 21.719.',
   robots: { index: false, follow: false },
 };
 

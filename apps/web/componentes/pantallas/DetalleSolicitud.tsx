@@ -338,7 +338,7 @@ export function DetalleSolicitud({ id }: { id: string }) {
         tipo: 'no_enviado',
         solicitudId: sol.id,
         detalle: gmail.conectado
-          ? 'Solicitud simulada: el titular es ficticio, así que no se envía correo. Se descargó el PDF.'
+          ? 'La solicitud llegó por el formulario web, no por Gmail: no se envía correo. Se descargó el PDF.'
           : 'Gmail no está conectado: respuesta registrada como «no enviado» y PDF descargado.',
       });
       toast({ body: 'Respuesta aprobada. Se descargó el PDF (no enviado por correo).' });
@@ -417,7 +417,7 @@ export function DetalleSolicitud({ id }: { id: string }) {
               {formatearFechaHora(sol.recibidaEn)}
             </MetadataListItem>
             <MetadataListItem label="Canal">
-              {sol.canal === 'gmail' ? `Gmail (${sol.gmail?.remitente ?? ''})` : 'Simulada'}
+              {sol.canal === 'gmail' ? `Gmail (${sol.gmail?.remitente ?? ''})` : 'Formulario web'}
             </MetadataListItem>
             <MetadataListItem label="RUT">{sol.titular.rut ?? 'No informado'}</MetadataListItem>
             <MetadataListItem label="Correo">
@@ -454,7 +454,7 @@ export function DetalleSolicitud({ id }: { id: string }) {
           <Text color="secondary">
             {claveApi
               ? `El agente (${infoModelo(ajustes.modelo).etiqueta}) busca al titular en ${fuentes.length} fuentes y redacta la respuesta. No envía correos ni modifica datos.`
-              : 'Modo demostración: el razonamiento está pregrabado, pero las búsquedas en las fuentes simuladas son reales. Configura tu clave para usar el agente.'}
+              : 'Modo demostración. Configura tu clave de Anthropic para usar el agente con el modelo.'}
           </Text>
           {error ? (
             <Banner status="error" title="La investigación no terminó" description={error} />
@@ -569,8 +569,8 @@ export function DetalleSolicitud({ id }: { id: string }) {
               <VStack gap={2}>
                 <Heading level={2}>Acciones propuestas por fuente</Heading>
                 <Text color="secondary">
-                  El agente solo propone. Ninguna acción se ejecuta en las fuentes desde el
-                  prototipo: la decide y la aplica una persona.
+                  El agente solo propone. Ninguna acción se ejecuta en las fuentes desde AI Titular:
+                  la decide y la aplica una persona.
                 </Text>
                 {propuesta.acciones.length === 0 ? (
                   <Text>No hay acciones propuestas.</Text>
@@ -629,7 +629,7 @@ export function DetalleSolicitud({ id }: { id: string }) {
                   {!puedeEnviarGmail ? (
                     <Text type="supporting" color="secondary">
                       {gmail.conectado
-                        ? 'Solicitud simulada: no se envía correo a titulares ficticios.'
+                        ? 'Llegó por el formulario web: la respuesta se entrega en PDF.'
                         : 'Gmail no conectado: el envío quedará como «no enviado».'}
                     </Text>
                   ) : null}
