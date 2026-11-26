@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Datos ficticios del prototipo y la prueba de la clave falsa"
+paths = ['''apps/web/e2e/.*''', '''packages/mock-data/archivos/.*''']

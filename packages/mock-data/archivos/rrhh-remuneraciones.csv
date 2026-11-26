@@ -1,0 +1,16 @@
+id,nombre,rut,cargo,fecha_ingreso,afp,isapre,licencias_medicas,detalle_licencias,sueldo_base
+rh-001,Antonia Hernandez Rodriguez,11.231.196-3,Cajero/a,2022-04-23,AFP Ejemplo Tres,Isapre Ficticia Vida,2,Licencia por enfermedad respiratoria; Licencia por cirugía programada,1390000
+rh-002,Raúl Contreras Flores,12.944.346-4,Jefe/a de bodega,2024-04-27,AFP Ejemplo Dos,Fonasa (simulado),3,Licencia maternal; Licencia por cirugía programada; Lumbago (licencia 7 días),1270000
+rh-003,Ines Silva Figueroa,14202947-2,Chofer de despacho,2024-10-01,AFP Ejemplo Uno,Isapre Ficticia Vida,3,Lumbago (licencia 7 días); Licencia por salud mental; Licencia por enfermedad respiratoria,820000
+rh-004,"Araya Núñez, Constanza",8992663-7,Asistente administrativo/a,2019-01-26,AFP Ejemplo Uno,Fonasa (simulado),2,Licencia maternal; Licencia por enfermedad respiratoria,1720000
+rh-005,Matías Jara Reyes,247754989,Asistente administrativo/a,2022-10-23,AFP Ejemplo Uno,Isapre Demo Salud,2,Licencia por cirugía programada; Licencia maternal,1700000
+rh-006,"Álvarez Fernández, Agustín",10.550.124-2,Jefe/a de bodega,2021-07-23,AFP Ejemplo Dos,Isapre Ficticia Vida,0,,600000
+rh-007,Isidora Gómez,24.886.248-3,Bodeguero/a,2026-07-04,AFP Ejemplo Uno,Isapre Ficticia Vida,0,,1430000
+rh-008,Constanza Rojas Bravo,171079926,Ejecutivo/a comercial,2022-08-01,AFP Ejemplo Tres,Fonasa (simulado),3,Licencia por salud mental; Licencia maternal; Lumbago (licencia 7 días),1450000
+rh-009,Andres Matias Reyes Gomez,12007458K,Bodeguero/a,2026-05-25,AFP Ejemplo Uno,Fonasa (simulado),0,,1390000
+rh-010,"Sánchez Pérez, Martina Javiera",143784371,Bodeguero/a,2023-10-11,AFP Ejemplo Tres,Fonasa (simulado),0,,960000
+rh-011,TOMÁS JARA MORALES,20231555-0,Chofer de despacho,2023-12-22,AFP Ejemplo Uno,Isapre Demo Salud,0,,960000
+rh-012,Hector Tomas Vergara Contreras,183945971,Bodeguero/a,2021-12-16,AFP Ejemplo Dos,Isapre Ficticia Vida,0,,1730000
+rh-013,Óscar Reyes,150139732,Analista contable,2020-05-09,AFP Ejemplo Dos,Isapre Demo Salud,0,,780000
+rh-014,Begoña Nicolás Rodríguez Silva,13.505.774-6,Chofer de despacho,2020-11-30,AFP Ejemplo Uno,Fonasa (simulado),0,,1010000
+rh-015,Catalina Figueroa Tapia,11792307K,Vendedor/a de sala,2019-05-20,AFP Ejemplo Uno,Fonasa (simulado),0,,640000

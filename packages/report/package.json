@@ -1,0 +1,28 @@
+{
+  "name": "@ley/report",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@ley/domain": "workspace:*",
+    "@react-pdf/renderer": "4.9.1",
+    "react": "19.3.1",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "@ley/config": "workspace:*",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "vitest": "5.1.2",
+    "@types/react": "19.3.3",
+    "@types/node": "22.20.7"
+  }
+}

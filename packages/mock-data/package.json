@@ -1,0 +1,27 @@
+{
+  "name": "@ley/mock-data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "gen:fuentes": "tsx scripts/gen-fuentes.ts"
+  },
+  "dependencies": {
+    "@ley/domain": "workspace:*",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "@ley/config": "workspace:*",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "vitest": "5.1.2",
+    "tsx": "4.23.15",
+    "@types/node": "22.20.7"
+  }
+}

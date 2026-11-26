@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      dependencias:
+        patterns: ['*']
+        exclude-patterns: ['@astryxdesign/*']
+    ignore:
+      # Astryx está en beta: se actualiza a mano con `npx @astryxdesign/cli upgrade`.
+      - dependency-name: '@astryxdesign/*'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

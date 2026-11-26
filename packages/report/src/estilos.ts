@@ -1,0 +1,62 @@
+import { StyleSheet } from '@react-pdf/renderer';
+
+export const MARCA = 'Datos ficticios · prototipo académico';
+
+export const estilos = StyleSheet.create({
+  pagina: {
+    padding: 48,
+    paddingBottom: 64,
+    fontSize: 10,
+    fontFamily: 'Helvetica',
+    color: '#1f2328',
+    lineHeight: 1.45,
+  },
+  marcaAgua: {
+    position: 'absolute',
+    top: 360,
+    left: 40,
+    right: 40,
+    textAlign: 'center',
+    fontSize: 38,
+    color: '#d0d7de',
+    opacity: 0.45,
+    transform: 'rotate(-30deg)',
+  },
+  cabecera: { borderBottom: '1pt solid #d0d7de', paddingBottom: 8, marginBottom: 16 },
+  empresa: { fontSize: 9, color: '#57606a' },
+  titulo: { fontSize: 16, fontFamily: 'Helvetica-Bold', marginTop: 4 },
+  subtitulo: { fontSize: 12, fontFamily: 'Helvetica-Bold', marginTop: 14, marginBottom: 6 },
+  meta: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    marginBottom: 12,
+    fontSize: 9,
+    color: '#57606a',
+  },
+  parrafo: { marginBottom: 6 },
+  aviso: { backgroundColor: '#fff8c5', padding: 8, fontSize: 9, marginBottom: 12, borderRadius: 4 },
+  tabla: { borderTop: '1pt solid #d0d7de', marginTop: 4 },
+  fila: { flexDirection: 'row', borderBottom: '1pt solid #eaeef2', paddingVertical: 3 },
+  filaCabecera: {
+    flexDirection: 'row',
+    borderBottom: '1pt solid #8c959f',
+    paddingVertical: 3,
+    fontFamily: 'Helvetica-Bold',
+  },
+  celda: { flex: 1, paddingRight: 6, fontSize: 8.5 },
+  pie: {
+    position: 'absolute',
+    bottom: 28,
+    left: 48,
+    right: 48,
+    fontSize: 8,
+    color: '#57606a',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  metricas: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8 },
+  metrica: { width: '31%', border: '1pt solid #d0d7de', borderRadius: 4, padding: 8 },
+  metricaValor: { fontSize: 16, fontFamily: 'Helvetica-Bold' },
+  metricaEtiqueta: { fontSize: 8, color: '#57606a' },
+});

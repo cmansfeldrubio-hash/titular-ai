@@ -1,0 +1,12 @@
+node_modules
+.next
+pnpm-lock.yaml
+coverage
+*.xlsx
+*.csv
+apps/web/astryx-themes.js
+apps/web/AGENTS.md
+apps/web/next-env.d.ts
+playwright-report
+test-results
+.turbo
